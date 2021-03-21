@@ -1,0 +1,74 @@
+﻿@model ArquivoViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Criar</h1>
+
+<h4>Arquivo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Tabela" class="control-label"></label>
+                <input asp-for="Tabela" class="form-control" />
+                <span asp-validation-for="Tabela" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Esquema" class="control-label"></label>
+                <input asp-for="Esquema" class="form-control" />
+                <span asp-validation-for="Esquema" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prefixo" class="control-label"></label>
+                <input asp-for="Prefixo" class="form-control" />
+                <span asp-validation-for="Prefixo" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Posicional" /> @Html.DisplayNameFor(model => model.Posicional)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Divisor" class="control-label"></label>
+                <input asp-for="Divisor" class="form-control" />
+                <span asp-validation-for="Divisor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FrequenciaExecucao" class="control-label"></label>
+                <select asp-for="FrequenciaExecucaoId" class="form-control" asp-items="@(new SelectList(Model.FrequenciasExecucao, "Id", "Frequencia"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="FrequenciaExecucao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaExecucao1" class="control-label"></label>
+                <input asp-for="DiaExecucao1" class="form-control" />
+                <span asp-validation-for="DiaExecucao1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaExecucao2" class="control-label"></label>
+                <input asp-for="DiaExecucao2" class="form-control" />
+                <span asp-validation-for="DiaExecucao2" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

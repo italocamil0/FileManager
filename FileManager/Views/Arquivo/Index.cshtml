@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ArquivoViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Arquivos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Criar novo arquivo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tabela)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Esquema)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prefixo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posicional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Divisor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FrequenciaExecucao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaExecucao1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaExecucao2)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tabela)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Esquema)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prefixo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posicional)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Divisor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrequenciaExecucao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaExecucao1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaExecucao2)
+            </td>            
+            <td class="text-right">
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+
+                <a class="btn btn-warning" asp-controller="Arquivo" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search">Detalhes</spam> </a>
+                <a disable-by-claim-name="Produto" disable-by-claim-value="Editar" class="btn btn-info" asp-controller="Arquivo" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt">Editar</spam> </a>
+                <a disable-by-claim-name="Produto" disable-by-claim-value="Excluir" class="btn btn-danger" asp-controller="Arquivo" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash">Deletar</spam> </a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

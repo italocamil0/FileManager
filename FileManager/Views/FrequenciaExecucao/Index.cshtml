@@ -1,0 +1,35 @@
+﻿@model IEnumerable<FileManager.Business.Models.FrequenciaExecucao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Frequencia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Frequencia)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-warning" asp-controller="FrequenciaExecucao" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search">Detalhes</spam> </a>
+                <a disable-by-claim-name="FrequenciaExecucao" disable-by-claim-value="Editar" class="btn btn-info" asp-controller="FrequenciaExecucao" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt">Editar</spam></a>
+                <a disable-by-claim-name="FrequenciaExecucao" disable-by-claim-value="Excluir" class="btn btn-danger" asp-controller="FrequenciaExecucao" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash">Deletar</spam> </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

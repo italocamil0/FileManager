@@ -1,0 +1,9 @@
+C:\TCC\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.deps.json
+C:\TCC\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.dll
+C:\TCC\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.pdb
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.AssemblyInfoInputs.cache
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.AssemblyInfo.cs
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.csproj.CoreCompileInputs.cache
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.dll
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.pdb
+C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.csprojAssemblyReference.cache
