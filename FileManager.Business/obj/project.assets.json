@@ -509,11 +509,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TCC\\FileManager\\FileManager\\FileManager.Business\\FileManager.Business.csproj",
+      "projectUniqueName": "C:\\FileManager\\FileManager\\FileManager.Business\\FileManager.Business.csproj",
       "projectName": "FileManager.Business",
-      "projectPath": "C:\\TCC\\FileManager\\FileManager\\FileManager.Business\\FileManager.Business.csproj",
+      "projectPath": "C:\\FileManager\\FileManager\\FileManager.Business\\FileManager.Business.csproj",
       "packagesPath": "C:\\Users\\italo\\.nuget\\packages\\",
-      "outputPath": "C:\\TCC\\FileManager\\FileManager\\FileManager.Business\\obj\\",
+      "outputPath": "C:\\FileManager\\FileManager\\FileManager.Business\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\italo\\AppData\\Roaming\\NuGet\\NuGet.Config",

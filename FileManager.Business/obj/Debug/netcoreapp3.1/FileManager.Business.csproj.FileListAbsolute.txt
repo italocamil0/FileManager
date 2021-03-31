@@ -7,3 +7,12 @@ C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\File
 C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.dll
 C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.pdb
 C:\TCC\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.csprojAssemblyReference.cache
+C:\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.deps.json
+C:\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.dll
+C:\FileManager\FileManager\FileManager.Business\bin\Debug\netcoreapp3.1\FileManager.Business.pdb
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.csprojAssemblyReference.cache
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.AssemblyInfoInputs.cache
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.AssemblyInfo.cs
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.csproj.CoreCompileInputs.cache
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.dll
+C:\FileManager\FileManager\FileManager.Business\obj\Debug\netcoreapp3.1\FileManager.Business.pdb

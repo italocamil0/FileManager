@@ -9268,11 +9268,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TCC\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
+      "projectUniqueName": "C:\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
       "projectName": "FileManager",
-      "projectPath": "C:\\TCC\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
+      "projectPath": "C:\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
       "packagesPath": "C:\\Users\\italo\\.nuget\\packages\\",
-      "outputPath": "C:\\TCC\\FileManager\\FileManager\\FileManager\\obj\\",
+      "outputPath": "C:\\FileManager\\FileManager\\FileManager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\italo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -9289,8 +9289,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\TCC\\FileManager\\FileManager\\FileManager.Data\\FileManager.Data.csproj": {
-              "projectPath": "C:\\TCC\\FileManager\\FileManager\\FileManager.Data\\FileManager.Data.csproj"
+            "C:\\FileManager\\FileManager\\FileManager.Data\\FileManager.Data.csproj": {
+              "projectPath": "C:\\FileManager\\FileManager\\FileManager.Data\\FileManager.Data.csproj"
             }
           }
         }

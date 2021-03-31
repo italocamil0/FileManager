@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "78b7fxPFhFlQ7LzCuKKDfhaDQItAw3RSL4JGChBa4uGghIYpHifIGBVofUc4UAMH4IFbp7Dy3XgGQnposKqQNQ==",
+  "dgSpecHash": "CtIPWpX0RlLSKQtKlKsheeFvZOY34pLEeknjAqAkzyb0SNSNZmuqjLvc130IRcAdkcp9ynApA0GPJiCAj4Kj+Q==",
   "success": true,
-  "projectFilePath": "C:\\TCC\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
+  "projectFilePath": "C:\\FileManager\\FileManager\\FileManager\\FileManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\italo\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\italo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
