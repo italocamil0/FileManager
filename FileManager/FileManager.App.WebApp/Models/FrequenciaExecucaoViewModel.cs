@@ -14,6 +14,15 @@ namespace FileManager.App.WebApp.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Frequencia { get; set; }
 
+        public string DiaDaSemana { get; set; }
+
+        
+        public int Dia1 { get; set; }
+        
+        public int Dia2 { get; set; }
+        public string Horario { get; set; }
+
+
         public ArquivoViewModel Arquivo { get; set; }
     }
 }
