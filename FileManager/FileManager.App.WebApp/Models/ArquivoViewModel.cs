@@ -12,13 +12,15 @@ namespace FileManager.App.WebApp.Models
         [Key]
         public Guid Id { get; set; }
 
+        [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DisplayName("Frequencia")]
-        public Guid FrequenciaExecucaoId { get; set; }
+        public Guid? FrequenciaExecucaoId { get; set; }
 
+        [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$")]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DisplayName("Prefixo")]
-        public Guid PrefixoId { get; set; }
+        public Guid? PrefixoId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Tabela { get; set; }

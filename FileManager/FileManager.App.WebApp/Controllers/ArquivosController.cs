@@ -32,8 +32,9 @@ namespace FileManager.App.WebApp.Controllers
         // GET: ArquivosController
         public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-            var meuDbContext = _context.Arquivos.Include(a => a.User);
-            return View(_mapper.Map<IEnumerable<ArquivoViewModel>>(await _arquivosRepository.ObterTodos()));
+            var meuDbContext = _context.Arquivos.Include(a => a.User).Include(f => f.FrequenciaExecucao).Include(p => p.Prefixo);
+
+            return View(_mapper.Map<IEnumerable<ArquivoViewModel>>(await _arquivosRepository.ObterArquivosFrequenciasPrefixos()));
         }
 
         // GET: ArquivosController/Details/5

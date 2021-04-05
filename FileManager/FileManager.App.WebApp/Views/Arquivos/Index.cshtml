@@ -61,7 +61,7 @@
                                     @Html.DisplayFor(modelItem => item.Esquema)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Prefixo)
+                                    @Html.DisplayFor(modelItem => item.Prefixo.Descricao)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Posicional)
@@ -70,7 +70,7 @@
                                     @Html.DisplayFor(modelItem => item.Divisor)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FrequenciaExecucao)
+                                    @Html.DisplayFor(modelItem => item.FrequenciaExecucao.Frequencia)
                                 </td>                               
                                 <td class="text-right">                                   
                                     <a class="btn btn-warning" asp-controller="Arquivo" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>
