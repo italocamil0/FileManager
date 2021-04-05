@@ -1,0 +1,75 @@
+﻿@model ArquivoViewModel
+
+<div class="panel-body">
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Tabela" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                    <input asp-for="Tabela" class="form-control" placeholder="Nome" />
+                </div>
+                <span asp-validation-for="Tabela" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Esquema" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    <input asp-for="Esquema" class="form-control" placeholder="Esquema" />
+                </div>
+                <span asp-validation-for="Esquema" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Posicional" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    <input class="form-check-input" asp-for="Posicional" /> @Html.DisplayNameFor(model => model.Posicional)
+                </div>
+                <span asp-validation-for="Posicional" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Divisor" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    <input asp-for="Divisor" class="form-control" placeholder="Divisor" />
+                </div>
+                <span asp-validation-for="Divisor" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FrequenciaExecucao" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    <select asp-for="FrequenciaExecucaoId" class="form-control" asp-items="@(new SelectList(Model.FrequenciasExecucao, "Id", "Frequencia"))">
+                        <option></option>
+                    </select>
+                </div>
+                <span asp-validation-for="FrequenciaExecucao" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Prefixo" class="control-label col-md-1"></label>
+            <div class="col-md-11">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    <select asp-for="PrefixoId" class="form-control" asp-items="@(new SelectList(Model.Prefixos, "Id", "Descricao"))">
+                        <option></option>
+                    </select>
+                </div>
+                <span asp-validation-for="Prefixo" class="text-danger"></span>
+            </div>
+        </div>
+
+
+    </div>
+</div>

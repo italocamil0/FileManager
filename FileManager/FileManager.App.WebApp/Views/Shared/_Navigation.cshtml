@@ -1,0 +1,33 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header \">
+                <div class="dropdown profile-element">
+                    <a class="dropdown-toggle" href="@Url.Action("Index", "Home", new { area = "" })">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">FileManager</strong>
+                            </span>
+                            <span class="text-muted text-xs block"><small>ASP.NET CORE</small></span>
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element">
+                    FM+
+                </div>
+            </li>
+            <li class="@Html.IsSelected(controller: "Home")">
+                <a href="@Url.Action("Index", "Home",  new { area = "" })"><i class="fa fa-home"></i> <span class="nav-label">Home</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Arquivos")">
+                <a href="@Url.Action("Index", "Arquivos",  new { area = "" })"><i class="fa fa-file"></i> <span class="nav-label">Arquivos</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Account")">
+                <a href="@Url.Action("Index", "Account", new { area = "" })"><i class="fa fa-users"></i> <span class="nav-label">Usuários</span></a>
+            </li>
+            <li>
+                <a href="https://github.com/italocamil0/FileManager" target="_blank"><i class="fa fa-github"></i> <span class="nav-label">GitHub</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
