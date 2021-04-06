@@ -34,6 +34,10 @@ namespace FileManager.Infra.Persistence.Context
                 .HasOne(po => po.User)
                 .WithMany(a => a.Arquivos)
                 .HasForeignKey(po => po.UserId);
+
+            modelBuilder.Entity<Arquivo>().HasIndex(s => s.PrefixoId).IsUnique(false);
+            modelBuilder.Entity<Arquivo>().HasIndex(s => s.FrequenciaExecucaoId).IsUnique(false);
+
         }
     }
 }

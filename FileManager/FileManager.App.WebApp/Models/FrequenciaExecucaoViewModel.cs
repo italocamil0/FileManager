@@ -11,7 +11,7 @@ namespace FileManager.App.WebApp.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        //[Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Frequencia { get; set; }
 
         public string DiaDaSemana { get; set; }

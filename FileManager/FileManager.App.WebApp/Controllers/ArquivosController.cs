@@ -57,7 +57,7 @@ namespace FileManager.App.WebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ArquivoViewModel viewModel)
-        {
+        {            
             await PopularFrequenciasExecucao(viewModel);
             await PopularPrefixos(viewModel);
 
@@ -67,6 +67,7 @@ namespace FileManager.App.WebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    LimparFrequencia(viewModel);
                     var arquivo = _mapper.Map<Arquivo>(viewModel);
                     arquivo.Id = Guid.NewGuid();
                     _context.Arquivos.Add(arquivo);
@@ -79,6 +80,39 @@ namespace FileManager.App.WebApp.Controllers
                 return View(viewModel);
             }
             return View(viewModel);
+        }
+
+        private void LimparFrequencia(ArquivoViewModel viewModel)
+        {
+            var frequencia = _frequenciaExecucaoRepository.ObterPorId(Guid.Parse(viewModel.FrequenciaExecucaoId.ToString())).Result;
+
+
+
+            switch (frequencia.Frequencia)
+            {
+                case "DIÁRIO":
+                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
+                    viewModel.FrequenciaExecucao.Dia1 = 0;
+                    viewModel.FrequenciaExecucao.Dia2 = 0;
+                    viewModel.FrequenciaExecucao.DiaDaSemana = null;                    
+                    break;
+                case "SEMANAL":
+                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
+                    viewModel.FrequenciaExecucao.Dia1 = 0;
+                    viewModel.FrequenciaExecucao.Dia2 = 0;                    
+                    break;
+                case "QUINZENAL":
+                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
+                    viewModel.FrequenciaExecucao.DiaDaSemana = null;
+                    break;
+                case "MENSAL":
+                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
+                    viewModel.FrequenciaExecucao.Dia2 = 0;
+                    viewModel.FrequenciaExecucao.DiaDaSemana = null;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // GET: ArquivosController/Edit/5

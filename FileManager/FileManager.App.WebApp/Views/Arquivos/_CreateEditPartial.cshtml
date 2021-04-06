@@ -78,7 +78,7 @@
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-money"></i></span>
                     <select asp-for="FrequenciaExecucao.DiaDaSemana" class="form-control">
-                        <option>Domingo</option>
+                        <option selected>Domingo</option>
                         <option>Segunda</option>
                         <option>Terça</option>
                         <option>Quarta</option>
@@ -96,7 +96,7 @@
             <div class="col-md-11">
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                    <input asp-for="FrequenciaExecucao.Dia1" class="form-control" placeholder="Dia 1" />
+                    <input asp-for="FrequenciaExecucao.Dia1" class="form-control"  value="0"  placeholder="Dia 1" />
                 </div>
                 <span asp-validation-for="FrequenciaExecucao.Dia1" class="text-danger"></span>
             </div>
@@ -107,7 +107,7 @@
             <div class="col-md-11">
                 <div class="input-group m-b">
                     <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                    <input asp-for="FrequenciaExecucao.Dia2" class="form-control" placeholder="Dia 2" />
+                    <input asp-for="FrequenciaExecucao.Dia2" class="form-control" value="0" placeholder="Dia 2" />
                 </div>
                 <span asp-validation-for="FrequenciaExecucao.Dia2" class="text-danger"></span>
             </div>
@@ -116,12 +116,19 @@
         <div id="divHorario" class="form-group" style="display:none">
             <label asp-for="FrequenciaExecucao.Horario" class="control-label col-md-1"></label>
             <div class="col-md-11">
-                <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                    <input asp-for="FrequenciaExecucao.Horario" class="form-control" placeholder="Horário" />
+                <div class="input-group clockpicker" data-autoclose="true">
+                    <input asp-for="FrequenciaExecucao.Horario" type="text" class="form-control" value="00:00">
+                    <span class="input-group-addon">
+                        <span class="fa fa-clock-o"></span>
+                    </span>
                 </div>
                 <span asp-validation-for="FrequenciaExecucao.Horario" class="text-danger"></span>
             </div>
         </div>
+
+
+       
+
+
     </div>
 </div>
