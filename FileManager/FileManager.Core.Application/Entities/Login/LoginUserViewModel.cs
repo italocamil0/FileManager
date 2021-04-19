@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace FileManager.Core.Application.DTOs.Login
+namespace FileManager.Core.Application.Entities.Login
 {
     public class LoginUserViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FileManager.App.WebApp.Models;
-using FileManager.Core.Application.DTOs;
+using FileManager.Core.Application.Entities;
 
 namespace FileManager.App.WebApp.AutoMapper
 {
@@ -8,8 +8,10 @@ namespace FileManager.App.WebApp.AutoMapper
     {
         public AutoMapperConfig()
         {
-            CreateMap<Prefixo, PrefixoViewModel>().ReverseMap();
+            
+            CreateMap<DetalheArquivoFrequencia, DetalheArquivoFrequenciaViewModel>().ReverseMap();
             CreateMap<FrequenciaExecucao, FrequenciaExecucaoViewModel>().ReverseMap();
+            CreateMap<Prefixo, PrefixoViewModel>().ReverseMap();
             CreateMap<Campo, CampoViewModel>().ReverseMap();
             CreateMap<Arquivo, ArquivoViewModel>().ReverseMap();
         }

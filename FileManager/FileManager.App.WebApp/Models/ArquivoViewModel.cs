@@ -44,6 +44,8 @@ namespace FileManager.App.WebApp.Models
         public PrefixoViewModel Prefixo { get; set; }
 
         public IEnumerable<FrequenciaExecucaoViewModel> FrequenciasExecucao { get; set; }
+
+        public DetalheArquivoFrequenciaViewModel DetalheArquivoFrequencia { get; set; }
         public IEnumerable<PrefixoViewModel> Prefixos { get; set; }
     }
 }

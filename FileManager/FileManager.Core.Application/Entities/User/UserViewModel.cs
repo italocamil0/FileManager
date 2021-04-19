@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FileManager.Core.Application.DTOs.User
+namespace FileManager.Core.Application.Entities.User
 {
     public class UserViewModel
     {

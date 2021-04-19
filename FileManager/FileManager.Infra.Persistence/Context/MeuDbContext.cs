@@ -1,4 +1,4 @@
-﻿using FileManager.Core.Application.DTOs;
+﻿using FileManager.Core.Application.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,8 @@ namespace FileManager.Infra.Persistence.Context
         public DbSet<FrequenciaExecucao> FrequenciaExecucao { get; set; }
 
         public DbSet<Prefixo> Prefixos { get; set; }
+
+        public DbSet<DetalheArquivoFrequencia> DetalheArquivoFrequencia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,9 +37,10 @@ namespace FileManager.Infra.Persistence.Context
                 .WithMany(a => a.Arquivos)
                 .HasForeignKey(po => po.UserId);
 
-            modelBuilder.Entity<Arquivo>().HasIndex(s => s.PrefixoId).IsUnique(false);
-            modelBuilder.Entity<Arquivo>().HasIndex(s => s.FrequenciaExecucaoId).IsUnique(false);
+            //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.ArquivoId).IsUnique(true);
+            //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.FrequenciaExecucaoId).IsUnique(true);
 
+            modelBuilder.Entity<DetalheArquivoFrequencia>().HasKey(vf => new { vf.ArquivoId, vf.FrequenciaExecucaoId });
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FileManager.Core.Application.DTOs.User
+namespace FileManager.Core.Application.Entities.User
 {
     public class ApplicationUser : IdentityUser
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FileManager.Core.Application.DTOs
+namespace FileManager.Core.Application.Entities
 {
     public class Campo : Entity
     {

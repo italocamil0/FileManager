@@ -14,6 +14,6 @@ namespace FileManager.App.WebApp.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Descricao { get; set; }
 
-        public ArquivoViewModel Arquivo { get; set; }
+        //public ArquivoViewModel Arquivo { get; set; }
     }
 }

@@ -45,14 +45,25 @@ namespace FileManager.Infra.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Prefixos",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(100)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prefixos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Arquivos",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FrequenciaExecucaoId = table.Column<Guid>(nullable: false),
+                    PrefixoId = table.Column<Guid>(nullable: false),
                     Tabela = table.Column<string>(type: "varchar(100)", nullable: true),
                     Esquema = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Prefixo = table.Column<string>(type: "varchar(100)", nullable: true),
                     Posicional = table.Column<bool>(nullable: false),
                     Divisor = table.Column<string>(type: "varchar(100)", nullable: true),
                     UserId = table.Column<string>(type: "varchar(100)", maxLength: 128, nullable: true)
@@ -61,9 +72,9 @@ namespace FileManager.Infra.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Arquivos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Arquivos_FrequenciaExecucao_FrequenciaExecucaoId",
-                        column: x => x.FrequenciaExecucaoId,
-                        principalTable: "FrequenciaExecucao",
+                        name: "FK_Arquivos_Prefixos_PrefixoId",
+                        column: x => x.PrefixoId,
+                        principalTable: "Prefixos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -95,11 +106,39 @@ namespace FileManager.Infra.Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DetalheArquivoFrequencia",
+                columns: table => new
+                {
+                    ArquivoId = table.Column<Guid>(nullable: false),
+                    FrequenciaExecucaoId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    DiaDaSemana = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Dia1 = table.Column<int>(nullable: true),
+                    Dia2 = table.Column<int>(nullable: true),
+                    Horario = table.Column<string>(type: "varchar(100)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetalheArquivoFrequencia", x => new { x.ArquivoId, x.FrequenciaExecucaoId });
+                    table.ForeignKey(
+                        name: "FK_DetalheArquivoFrequencia_Arquivos_ArquivoId",
+                        column: x => x.ArquivoId,
+                        principalTable: "Arquivos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DetalheArquivoFrequencia_FrequenciaExecucao_FrequenciaExecucaoId",
+                        column: x => x.FrequenciaExecucaoId,
+                        principalTable: "FrequenciaExecucao",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Arquivos_FrequenciaExecucaoId",
+                name: "IX_Arquivos_PrefixoId",
                 table: "Arquivos",
-                column: "FrequenciaExecucaoId",
-                unique: true);
+                column: "PrefixoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Arquivos_UserId",
@@ -110,6 +149,17 @@ namespace FileManager.Infra.Persistence.Migrations
                 name: "IX_Campo_ArquivoId",
                 table: "Campo",
                 column: "ArquivoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalheArquivoFrequencia_ArquivoId",
+                table: "DetalheArquivoFrequencia",
+                column: "ArquivoId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetalheArquivoFrequencia_FrequenciaExecucaoId",
+                table: "DetalheArquivoFrequencia",
+                column: "FrequenciaExecucaoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -118,10 +168,16 @@ namespace FileManager.Infra.Persistence.Migrations
                 name: "Campo");
 
             migrationBuilder.DropTable(
+                name: "DetalheArquivoFrequencia");
+
+            migrationBuilder.DropTable(
                 name: "Arquivos");
 
             migrationBuilder.DropTable(
                 name: "FrequenciaExecucao");
+
+            migrationBuilder.DropTable(
+                name: "Prefixos");
 
             migrationBuilder.DropTable(
                 name: "ApplicationUser");

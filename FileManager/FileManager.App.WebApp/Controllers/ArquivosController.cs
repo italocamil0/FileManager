@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FileManager.App.WebApp.Models;
-using FileManager.Core.Application.DTOs;
+using FileManager.Core.Application.Entities;
 using FileManager.Core.Application.Persistence;
 using FileManager.Infra.Persistence.Context;
 using Microsoft.AspNetCore.Http;
@@ -32,8 +32,9 @@ namespace FileManager.App.WebApp.Controllers
         // GET: ArquivosController
         public async System.Threading.Tasks.Task<ActionResult> Index()
         {
-            var meuDbContext = _context.Arquivos.Include(a => a.User).Include(f => f.FrequenciaExecucao).Include(p => p.Prefixo);
-
+            //var meuDbContext = _context.Arquivos.Include(a => a.User).Include(d => d.DetalheArquivoFrequencia);
+            //_context.DetalheArquivoFrequencia.Include(f => f.FrequenciasExecucao);            
+            var teste3 = await _arquivosRepository.ObterArquivosFrequenciasPrefixos();
             return View(_mapper.Map<IEnumerable<ArquivoViewModel>>(await _arquivosRepository.ObterArquivosFrequenciasPrefixos()));
         }
 
@@ -71,6 +72,7 @@ namespace FileManager.App.WebApp.Controllers
                     var arquivo = _mapper.Map<Arquivo>(viewModel);
                     arquivo.Id = Guid.NewGuid();
                     _context.Arquivos.Add(arquivo);
+                    _context.DetalheArquivoFrequencia.Add(new DetalheArquivoFrequencia() { ArquivoId = arquivo.Id, FrequenciaExecucaoId = viewModel.FrequenciaExecucaoId.Value, Horario = viewModel.FrequenciaExecucao.Horario, Dia1 = viewModel.FrequenciaExecucao.Dia1, Dia2 = viewModel.FrequenciaExecucao.Dia2, DiaDaSemana = viewModel.FrequenciaExecucao.DiaDaSemana });
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }

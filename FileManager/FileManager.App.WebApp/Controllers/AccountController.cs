@@ -1,10 +1,9 @@
-﻿using FileManager.Core.Application.DTOs.Login;
-using FileManager.Core.Application.DTOs.User;
+﻿using FileManager.Core.Application.Entities.Login;
+using FileManager.Core.Application.Entities.User;
 using FileManager.Core.Application.Mappings;
 using FileManager.Infra.Security.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

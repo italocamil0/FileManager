@@ -1,4 +1,4 @@
-﻿using FileManager.Core.Application.DTOs;
+﻿using FileManager.Core.Application.Entities;
 using FileManager.Core.Application.Persistence;
 using FileManager.Infra.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,9 @@ namespace FileManager.Infra.Persistence
 
         public async Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos()
         {
-            return await Db.Arquivos.AsNoTracking().Include(f => f.FrequenciaExecucao).Include(p => p.Prefixo)
+
+
+            return await Db.Arquivos.AsNoTracking().Include(p => p.Prefixo).Include(d => d.DetalheArquivoFrequencia).ThenInclude(cs=>cs.FrequenciasExecucao)
                 .OrderBy(p => p.Tabela).ToListAsync();
         }
 

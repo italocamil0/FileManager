@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FileManager.Core.Application.DTOs.User;
+using FileManager.Core.Application.Entities.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace FileManager.Core.Application.Mappings

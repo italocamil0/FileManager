@@ -1,4 +1,4 @@
-﻿using FileManager.Core.Application.DTOs;
+﻿using FileManager.Core.Application.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

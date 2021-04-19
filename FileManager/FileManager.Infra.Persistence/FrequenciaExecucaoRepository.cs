@@ -1,4 +1,4 @@
-﻿using FileManager.Core.Application.DTOs;
+﻿using FileManager.Core.Application.Entities;
 using FileManager.Core.Application.Persistence;
 using FileManager.Infra.Persistence.Context;
 using Microsoft.EntityFrameworkCore;

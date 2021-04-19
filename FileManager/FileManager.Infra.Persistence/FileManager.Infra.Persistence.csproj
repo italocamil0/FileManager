@@ -18,4 +18,8 @@
     <ProjectReference Include="..\FileManager.Core.Application\FileManager.Core.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

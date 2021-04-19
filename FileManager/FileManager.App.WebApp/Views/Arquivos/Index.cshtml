@@ -45,7 +45,7 @@
                                 @Html.DisplayNameFor(model => model.Divisor)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FrequenciaExecucao)
+                                @Html.DisplayNameFor(model => model.DetalheArquivoFrequencia.FrequenciasExecucao.Frequencia)
                             </th>                           
                             <th></th>
                         </tr>
@@ -70,7 +70,7 @@
                                     @Html.DisplayFor(modelItem => item.Divisor)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FrequenciaExecucao.Frequencia)
+                                    @Html.DisplayFor(modelItem => item.DetalheArquivoFrequencia.FrequenciasExecucao.Frequencia)
                                 </td>                               
                                 <td class="text-right">                                   
                                     <a class="btn btn-warning" asp-controller="Arquivo" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>

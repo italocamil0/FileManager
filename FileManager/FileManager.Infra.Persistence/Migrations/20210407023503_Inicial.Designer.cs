@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileManager.Infra.Persistence.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20210406013627_removendo chave única dos index Prefixo e Frequencia")]
-    partial class removendochaveúnicadosindexPrefixoeFrequencia
+    [Migration("20210407023503_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace FileManager.Infra.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.Arquivo", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.Arquivo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,9 +32,6 @@ namespace FileManager.Infra.Persistence.Migrations
 
                     b.Property<string>("Esquema")
                         .HasColumnType("varchar(100)");
-
-                    b.Property<Guid>("FrequenciaExecucaoId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Posicional")
                         .HasColumnType("bit");
@@ -51,8 +48,6 @@ namespace FileManager.Infra.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FrequenciaExecucaoId");
-
                     b.HasIndex("PrefixoId");
 
                     b.HasIndex("UserId");
@@ -60,7 +55,7 @@ namespace FileManager.Infra.Persistence.Migrations
                     b.ToTable("Arquivos");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.Campo", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.Campo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,25 +80,46 @@ namespace FileManager.Infra.Persistence.Migrations
                     b.ToTable("Campo");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.FrequenciaExecucao", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.DetalheArquivoFrequencia", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("ArquivoId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Dia1")
+                    b.Property<Guid>("FrequenciaExecucaoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Dia1")
                         .HasColumnType("int");
 
-                    b.Property<int>("Dia2")
+                    b.Property<int?>("Dia2")
                         .HasColumnType("int");
 
                     b.Property<string>("DiaDaSemana")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Frequencia")
+                    b.Property<string>("Horario")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Horario")
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ArquivoId", "FrequenciaExecucaoId");
+
+                    b.HasIndex("ArquivoId")
+                        .IsUnique();
+
+                    b.HasIndex("FrequenciaExecucaoId");
+
+                    b.ToTable("DetalheArquivoFrequencia");
+                });
+
+            modelBuilder.Entity("FileManager.Core.Application.Entities.FrequenciaExecucao", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Frequencia")
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
@@ -111,7 +127,7 @@ namespace FileManager.Infra.Persistence.Migrations
                     b.ToTable("FrequenciaExecucao");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.Prefixo", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.Prefixo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,7 +141,7 @@ namespace FileManager.Infra.Persistence.Migrations
                     b.ToTable("Prefixos");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.User.ApplicationUser", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.User.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(100)");
@@ -177,28 +193,36 @@ namespace FileManager.Infra.Persistence.Migrations
                     b.ToTable("ApplicationUser");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.Arquivo", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.Arquivo", b =>
                 {
-                    b.HasOne("FileManager.Core.Application.DTOs.FrequenciaExecucao", "FrequenciaExecucao")
-                        .WithOne("Arquivo")
-                        .HasForeignKey("FileManager.Core.Application.DTOs.Arquivo", "FrequenciaExecucaoId")
+                    b.HasOne("FileManager.Core.Application.Entities.Prefixo", "Prefixo")
+                        .WithMany("Arquivo")
+                        .HasForeignKey("PrefixoId")
                         .IsRequired();
 
-                    b.HasOne("FileManager.Core.Application.DTOs.Prefixo", "Prefixo")
-                        .WithOne("Arquivo")
-                        .HasForeignKey("FileManager.Core.Application.DTOs.Arquivo", "PrefixoId")
-                        .IsRequired();
-
-                    b.HasOne("FileManager.Core.Application.DTOs.User.ApplicationUser", "User")
+                    b.HasOne("FileManager.Core.Application.Entities.User.ApplicationUser", "User")
                         .WithMany("Arquivos")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("FileManager.Core.Application.DTOs.Campo", b =>
+            modelBuilder.Entity("FileManager.Core.Application.Entities.Campo", b =>
                 {
-                    b.HasOne("FileManager.Core.Application.DTOs.Arquivo", "Arquivo")
+                    b.HasOne("FileManager.Core.Application.Entities.Arquivo", "Arquivo")
                         .WithMany("Campos")
                         .HasForeignKey("ArquivoId");
+                });
+
+            modelBuilder.Entity("FileManager.Core.Application.Entities.DetalheArquivoFrequencia", b =>
+                {
+                    b.HasOne("FileManager.Core.Application.Entities.Arquivo", "Arquivo")
+                        .WithOne("DetalheArquivoFrequencia")
+                        .HasForeignKey("FileManager.Core.Application.Entities.DetalheArquivoFrequencia", "ArquivoId")
+                        .IsRequired();
+
+                    b.HasOne("FileManager.Core.Application.Entities.FrequenciaExecucao", "FrequenciasExecucao")
+                        .WithMany("DetalhesArquivoFrequencia")
+                        .HasForeignKey("FrequenciaExecucaoId")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
