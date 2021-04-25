@@ -8,6 +8,6 @@ namespace FileManager.Core.Application.Entities
     {
         public string Frequencia { get; set; }
         
-        public IEnumerable<DetalheArquivoFrequencia> DetalhesArquivoFrequencia { get; set; }
+        //public IEnumerable<DetalheArquivoFrequencia> DetalhesArquivoFrequencia { get; set; }
     }
 }

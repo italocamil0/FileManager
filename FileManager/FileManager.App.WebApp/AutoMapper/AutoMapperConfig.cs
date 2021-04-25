@@ -9,7 +9,7 @@ namespace FileManager.App.WebApp.AutoMapper
         public AutoMapperConfig()
         {
             
-            CreateMap<DetalheArquivoFrequencia, DetalheArquivoFrequenciaViewModel>().ReverseMap();
+            //CreateMap<DetalheArquivoFrequencia, DetalheArquivoFrequenciaViewModel>().ReverseMap();
             CreateMap<FrequenciaExecucao, FrequenciaExecucaoViewModel>().ReverseMap();
             CreateMap<Prefixo, PrefixoViewModel>().ReverseMap();
             CreateMap<Campo, CampoViewModel>().ReverseMap();

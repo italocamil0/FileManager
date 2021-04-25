@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Entities\DetalheArquivoFrequencia.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.13">

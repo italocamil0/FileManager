@@ -9,5 +9,9 @@ namespace FileManager.Core.Application.Persistence
     public interface IArquivosRepository : IRepository<Arquivo>
     {
         Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos();
+
+        //Task<DetalheArquivoFrequencia> ObterDetalheArquivoFrequencia(Guid idArquivo);
+
+        //void SalvarDetalheArquivoFrequencia(DetalheArquivoFrequencia detalheArquivoFrequencia);
     }
 }

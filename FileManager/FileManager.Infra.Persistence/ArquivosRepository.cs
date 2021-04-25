@@ -2,6 +2,7 @@
 using FileManager.Core.Application.Persistence;
 using FileManager.Infra.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,11 +17,21 @@ namespace FileManager.Infra.Persistence
 
         public async Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos()
         {
-
-
-            return await Db.Arquivos.AsNoTracking().Include(p => p.Prefixo).Include(d => d.DetalheArquivoFrequencia).ThenInclude(cs=>cs.FrequenciasExecucao)
+            return await Db.Arquivos.AsNoTracking().Include(p => p.Prefixo).Include(d => d.FrequenciaExecucao)
                 .OrderBy(p => p.Tabela).ToListAsync();
         }
+
+
+        //public async Task<DetalheArquivoFrequencia> ObterDetalheArquivoFrequencia(Guid idArquivo)
+        //{
+        //    return await Db.DetalheArquivoFrequencia.FirstOrDefaultAsync(x => x.ArquivoId == idArquivo);
+        //}
+
+
+        //public void SalvarDetalheArquivoFrequencia(DetalheArquivoFrequencia detalheArquivoFrequencia)
+        //{
+        //    Db.DetalheArquivoFrequencia.Update(detalheArquivoFrequencia);           
+        //}
 
     }
 }

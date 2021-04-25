@@ -17,7 +17,7 @@ namespace FileManager.Infra.Persistence.Context
 
         public DbSet<Prefixo> Prefixos { get; set; }
 
-        public DbSet<DetalheArquivoFrequencia> DetalheArquivoFrequencia { get; set; }
+        //public DbSet<DetalheArquivoFrequencia> DetalheArquivoFrequencia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace FileManager.Infra.Persistence.Context
             //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.ArquivoId).IsUnique(true);
             //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.FrequenciaExecucaoId).IsUnique(true);
 
-            modelBuilder.Entity<DetalheArquivoFrequencia>().HasKey(vf => new { vf.ArquivoId, vf.FrequenciaExecucaoId });
+            //modelBuilder.Entity<DetalheArquivoFrequencia>().HasKey(vf => new { vf.ArquivoId, vf.FrequenciaExecucaoId });
         }
     }
 }

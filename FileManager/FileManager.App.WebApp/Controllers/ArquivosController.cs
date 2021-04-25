@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FileManager.App.WebApp.Controllers
@@ -20,7 +21,7 @@ namespace FileManager.App.WebApp.Controllers
         private readonly IFrequenciaExecucaoRepository _frequenciaExecucaoRepository;
         private readonly IPrefixoRepository _prefixoRepository;
 
-        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository  )
+        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository)
         {
             _context = context;
             _mapper = mapper;
@@ -39,9 +40,11 @@ namespace FileManager.App.WebApp.Controllers
         }
 
         // GET: ArquivosController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault());
+            viewModel.FrequenciaExecucao = _mapper.Map<FrequenciaExecucaoViewModel>(_frequenciaExecucaoRepository.Buscar(x => x.Id == viewModel.FrequenciaExecucaoId).Result.FirstOrDefault());
+            return View(viewModel);
         }
 
         // GET: ArquivosController/Create
@@ -52,13 +55,13 @@ namespace FileManager.App.WebApp.Controllers
             await PopularPrefixos(produtoViewModel);
 
             return View(produtoViewModel);
-        }  
+        }
 
         // POST: ArquivosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ArquivoViewModel viewModel)
-        {            
+        {
             await PopularFrequenciasExecucao(viewModel);
             await PopularPrefixos(viewModel);
 
@@ -71,9 +74,11 @@ namespace FileManager.App.WebApp.Controllers
                     LimparFrequencia(viewModel);
                     var arquivo = _mapper.Map<Arquivo>(viewModel);
                     arquivo.Id = Guid.NewGuid();
-                    _context.Arquivos.Add(arquivo);
-                    _context.DetalheArquivoFrequencia.Add(new DetalheArquivoFrequencia() { ArquivoId = arquivo.Id, FrequenciaExecucaoId = viewModel.FrequenciaExecucaoId.Value, Horario = viewModel.FrequenciaExecucao.Horario, Dia1 = viewModel.FrequenciaExecucao.Dia1, Dia2 = viewModel.FrequenciaExecucao.Dia2, DiaDaSemana = viewModel.FrequenciaExecucao.DiaDaSemana });
-                    await _context.SaveChangesAsync();
+                    arquivo.FrequenciaExecucao = null;
+                    await _arquivosRepository.Adicionar(arquivo);
+                    //_context.Arquivos.Add(arquivo);
+                    //_context.DetalheArquivoFrequencia.Add(new DetalheArquivoFrequencia() { ArquivoId = arquivo.Id, FrequenciaExecucaoId = viewModel.FrequenciaExecucaoId.Value, Horario = viewModel.FrequenciaExecucao.Horario, Dia1 = viewModel.FrequenciaExecucao.Dia1, Dia2 = viewModel.FrequenciaExecucao.Dia2, DiaDaSemana = viewModel.FrequenciaExecucao.DiaDaSemana });
+                    //await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -88,29 +93,30 @@ namespace FileManager.App.WebApp.Controllers
         {
             var frequencia = _frequenciaExecucaoRepository.ObterPorId(Guid.Parse(viewModel.FrequenciaExecucaoId.ToString())).Result;
 
-
+            //viewModel.FrequenciaExecucao = new FrequenciaExecucaoViewModel();
+            //viewModel.FrequenciaExecucao = _mapper.Map<FrequenciaExecucaoViewModel>(frequencia);
 
             switch (frequencia.Frequencia)
             {
                 case "DIÁRIO":
-                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
-                    viewModel.FrequenciaExecucao.Dia1 = 0;
-                    viewModel.FrequenciaExecucao.Dia2 = 0;
-                    viewModel.FrequenciaExecucao.DiaDaSemana = null;                    
+
+                    viewModel.Dia1 = 0;
+                    viewModel.Dia2 = 0;
+                    viewModel.DiaDaSemana = null;
                     break;
                 case "SEMANAL":
-                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
-                    viewModel.FrequenciaExecucao.Dia1 = 0;
-                    viewModel.FrequenciaExecucao.Dia2 = 0;                    
+
+                    viewModel.Dia1 = 0;
+                    viewModel.Dia2 = 0;
                     break;
                 case "QUINZENAL":
-                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
-                    viewModel.FrequenciaExecucao.DiaDaSemana = null;
+
+                    viewModel.DiaDaSemana = null;
                     break;
                 case "MENSAL":
-                    viewModel.FrequenciaExecucao.Frequencia = frequencia.Frequencia;
-                    viewModel.FrequenciaExecucao.Dia2 = 0;
-                    viewModel.FrequenciaExecucao.DiaDaSemana = null;
+
+                    viewModel.Dia2 = 0;
+                    viewModel.DiaDaSemana = null;
                     break;
                 default:
                     break;
@@ -118,45 +124,63 @@ namespace FileManager.App.WebApp.Controllers
         }
 
         // GET: ArquivosController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> EditAsync(string id)
         {
-            return View();
+            var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == Guid.Parse(id)).Result.ToList().FirstOrDefault());
+
+            await PopularFrequenciasExecucao(viewModel);
+            await PopularPrefixos(viewModel);
+
+            //var teste = await _arquivosRepository.ObterDetalheArquivoFrequencia(viewModel.Id);
+
+            //viewModel.DetalheArquivoFrequencia =  _mapper.Map<DetalheArquivoFrequenciaViewModel>(teste);
+
+            //viewModel.FrequenciaExecucaoId = viewModel.DetalheArquivoFrequencia.FrequenciaExecucaoId;
+
+            return View(viewModel);
         }
 
         // POST: ArquivosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditAsync(string id, ArquivoViewModel viewModel)
         {
             try
             {
+                if (ModelState.IsValid)
+                {
+                    LimparFrequencia(viewModel);
+                    var arquivoBase = _mapper.Map<Arquivo>(viewModel);
+                    await _arquivosRepository.Atualizar(_mapper.Map<Arquivo>(viewModel));
+                }
+                else
+                {
+                    return View(viewModel);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(viewModel);
             }
         }
 
         // GET: ArquivosController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault());
+            viewModel.FrequenciaExecucao = _mapper.Map<FrequenciaExecucaoViewModel>(_frequenciaExecucaoRepository.Buscar(x => x.Id == viewModel.FrequenciaExecucaoId).Result.FirstOrDefault());
+            return View(viewModel);
         }
 
         // POST: ArquivosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(ArquivoViewModel viewModel)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await _arquivosRepository.Remover(viewModel.Id);
+            return RedirectToAction(nameof(Index));
         }
 
         private async Task<ArquivoViewModel> PopularFrequenciasExecucao(ArquivoViewModel arquivo)

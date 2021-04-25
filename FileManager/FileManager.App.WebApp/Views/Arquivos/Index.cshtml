@@ -45,7 +45,7 @@
                                 @Html.DisplayNameFor(model => model.Divisor)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DetalheArquivoFrequencia.FrequenciasExecucao.Frequencia)
+                                @Html.DisplayNameFor(model => model.FrequenciaExecucao.Frequencia)
                             </th>                           
                             <th></th>
                         </tr>
@@ -70,12 +70,12 @@
                                     @Html.DisplayFor(modelItem => item.Divisor)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DetalheArquivoFrequencia.FrequenciasExecucao.Frequencia)
+                                    @Html.DisplayFor(modelItem => item.FrequenciaExecucao.Frequencia)
                                 </td>                               
                                 <td class="text-right">                                   
-                                    <a class="btn btn-warning" asp-controller="Arquivo" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>
-                                    <a disable-by-claim-name="Produto" disable-by-claim-value="Editar" class="btn btn-info" asp-controller="Arquivo" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil"></spam> </a>
-                                    <a disable-by-claim-name="Produto" disable-by-claim-value="Excluir" class="btn btn-danger" asp-controller="Arquivo" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam> </a>
+                                    <a class="btn btn-warning" asp-controller="Arquivos" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>
+                                    <a disable-by-claim-name="Produto" disable-by-claim-value="Editar" class="btn btn-info" asp-controller="Arquivos" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil"></spam> </a>
+                                    <a disable-by-claim-name="Produto" disable-by-claim-value="Excluir" class="btn btn-danger" asp-controller="Arquivos" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam> </a>
                                 </td>
                             </tr>
                         }

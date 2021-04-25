@@ -42,10 +42,17 @@ namespace FileManager.App.WebApp.Models
 
         [DisplayName("Prefixo")]
         public PrefixoViewModel Prefixo { get; set; }
+        public string DiaDaSemana { get; set; }
+
+        public int? Dia1 { get; set; }
+
+        public int? Dia2 { get; set; }
+
+        public string Horario { get; set; }
 
         public IEnumerable<FrequenciaExecucaoViewModel> FrequenciasExecucao { get; set; }
 
-        public DetalheArquivoFrequenciaViewModel DetalheArquivoFrequencia { get; set; }
+        //public DetalheArquivoFrequenciaViewModel DetalheArquivoFrequencia { get; set; }
         public IEnumerable<PrefixoViewModel> Prefixos { get; set; }
     }
 }

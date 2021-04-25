@@ -11,7 +11,7 @@ namespace FileManager.Core.Application.Entities
     {
         
         public Guid PrefixoId { get; set; }
-
+        public Guid FrequenciaExecucaoId { get; set; }
         public string Tabela { get; set; }
         public string Esquema { get; set; }
         public IEnumerable<Campo> Campos { get; set; }
@@ -21,10 +21,12 @@ namespace FileManager.Core.Application.Entities
         [MaxLength(128), ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
-
-        
         public Prefixo Prefixo { get; set; }
-
-        public DetalheArquivoFrequencia DetalheArquivoFrequencia { get; set; }
+        public FrequenciaExecucao FrequenciaExecucao { get; set; }
+        public string DiaDaSemana { get; set; }
+        public int? Dia1 { get; set; }
+        public int? Dia2 { get; set; }
+        public string Horario { get; set; }
+        //public DetalheArquivoFrequencia DetalheArquivoFrequencia { get; set; }
     }
 }
