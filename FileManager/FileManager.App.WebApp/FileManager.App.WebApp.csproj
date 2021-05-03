@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FileManager.Core.Adapters\FileManager.Core.Adapters.csproj" />
     <ProjectReference Include="..\FileManager.Core.Application\FileManager.Core.Application.csproj" />
     <ProjectReference Include="..\FileManager.Infra.Persistence\FileManager.Infra.Persistence.csproj" />
     <ProjectReference Include="..\FileManager.Infra.Security\FileManager.Infra.Security.csproj" />

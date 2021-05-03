@@ -1,4 +1,6 @@
+using FileManager.Core.Adapters.ServiceBus;
 using FileManager.Core.Application.Persistence;
+using FileManager.Core.Application.Port;
 using FileManager.Infra.Persistence;
 using FileManager.Infra.Persistence.Context;
 using FileManager.Infra.Security.IoC;
@@ -35,6 +37,7 @@ namespace FileManager.App.WebApp
             services.AddScoped<IArquivosRepository, ArquivosRepository>();
             services.AddScoped<IFrequenciaExecucaoRepository, FrequenciaExecucaoRepository>();
             services.AddScoped<IPrefixoRepository, PrefixoRepository>();
+            services.AddScoped<ISendMessagePort, ServiceBus>();
 
             services.AddControllersWithViews(config =>
             {

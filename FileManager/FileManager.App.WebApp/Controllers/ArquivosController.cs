@@ -2,6 +2,7 @@
 using FileManager.App.WebApp.Models;
 using FileManager.Core.Application.Entities;
 using FileManager.Core.Application.Persistence;
+using FileManager.Core.Application.Port;
 using FileManager.Infra.Persistence.Context;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,14 +21,17 @@ namespace FileManager.App.WebApp.Controllers
         private readonly IArquivosRepository _arquivosRepository;
         private readonly IFrequenciaExecucaoRepository _frequenciaExecucaoRepository;
         private readonly IPrefixoRepository _prefixoRepository;
+        private readonly ISendMessagePort _sendMessagePort;
 
-        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository)
+
+        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository, ISendMessagePort sendMessagePort)
         {
             _context = context;
             _mapper = mapper;
             _arquivosRepository = arquivosRepository;
             _frequenciaExecucaoRepository = frequenciaExecucaoRepository;
             _prefixoRepository = prefixoRepository;
+            _sendMessagePort = sendMessagePort;
         }
 
         // GET: ArquivosController
@@ -45,6 +49,15 @@ namespace FileManager.App.WebApp.Controllers
             var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault());
             viewModel.FrequenciaExecucao = _mapper.Map<FrequenciaExecucaoViewModel>(_frequenciaExecucaoRepository.Buscar(x => x.Id == viewModel.FrequenciaExecucaoId).Result.FirstOrDefault());
             return View(viewModel);
+        }
+
+        public ActionResult Run(Guid id)
+        {
+            var arquivo = _arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault();
+
+            _sendMessagePort.SendMessageAsync(arquivo);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ArquivosController/Create

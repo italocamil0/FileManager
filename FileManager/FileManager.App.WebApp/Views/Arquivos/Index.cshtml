@@ -72,13 +72,14 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FrequenciaExecucao.Frequencia)
                                 </td>                               
-                                <td class="text-right">                                   
+                                <td class="text-right">
+                                    <a class="btn btn-info" asp-controller="Arquivos" asp-action="Run" asp-route-id="@item.Id"> Executar </a>
                                     <a class="btn btn-warning" asp-controller="Arquivos" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>
                                     <a disable-by-claim-name="Produto" disable-by-claim-value="Editar" class="btn btn-info" asp-controller="Arquivos" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil"></spam> </a>
                                     <a disable-by-claim-name="Produto" disable-by-claim-value="Excluir" class="btn btn-danger" asp-controller="Arquivos" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam> </a>
                                 </td>
                             </tr>
-                        }
+                        }                                                                                                                                                                                                                                                                                           
                     </tbody>
                 </table>
             </div>
