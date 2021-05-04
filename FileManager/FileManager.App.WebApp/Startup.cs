@@ -37,6 +37,7 @@ namespace FileManager.App.WebApp
             services.AddScoped<IArquivosRepository, ArquivosRepository>();
             services.AddScoped<IFrequenciaExecucaoRepository, FrequenciaExecucaoRepository>();
             services.AddScoped<IPrefixoRepository, PrefixoRepository>();
+            services.AddScoped<ICamposRepository, CamposRepository>();
             services.AddScoped<ISendMessagePort, ServiceBus>();
 
             services.AddControllersWithViews(config =>

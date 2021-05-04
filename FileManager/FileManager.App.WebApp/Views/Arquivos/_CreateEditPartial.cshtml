@@ -1,6 +1,6 @@
 ﻿@model ArquivoViewModel
 
-<div class="panel-body">
+<div  class="panel-body">
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -126,9 +126,22 @@
             </div>
         </div>
 
-
-       
+        <div id="camposContainer">
+            @Html.EditorFor(model=> model.Campos)
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input class="btn btn-default" type="button" id="btnAdd" value="Adicionar Campo" />
+            </div>
+        </div>
 
 
     </div>
 </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        
+    </script>
+}

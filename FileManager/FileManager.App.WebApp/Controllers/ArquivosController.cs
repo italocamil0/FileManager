@@ -22,9 +22,11 @@ namespace FileManager.App.WebApp.Controllers
         private readonly IFrequenciaExecucaoRepository _frequenciaExecucaoRepository;
         private readonly IPrefixoRepository _prefixoRepository;
         private readonly ISendMessagePort _sendMessagePort;
+        private readonly ICamposRepository _camposRepository;
 
 
-        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository, ISendMessagePort sendMessagePort)
+
+        public ArquivosController(MeuDbContext context, IMapper mapper, IArquivosRepository arquivosRepository, IFrequenciaExecucaoRepository frequenciaExecucaoRepository, IPrefixoRepository prefixoRepository, ISendMessagePort sendMessagePort, ICamposRepository camposRepository)
         {
             _context = context;
             _mapper = mapper;
@@ -32,6 +34,7 @@ namespace FileManager.App.WebApp.Controllers
             _frequenciaExecucaoRepository = frequenciaExecucaoRepository;
             _prefixoRepository = prefixoRepository;
             _sendMessagePort = sendMessagePort;
+            _camposRepository = camposRepository;
         }
 
         // GET: ArquivosController
@@ -102,6 +105,14 @@ namespace FileManager.App.WebApp.Controllers
             return View(viewModel);
         }
 
+        [HttpPost]
+       // [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddCampo(ArquivoViewModel arquivo)
+        {
+            arquivo.Campos.Add(new CampoViewModel());
+            return PartialView("_CamposArquivo", arquivo);
+        }
+
         private void LimparFrequencia(ArquivoViewModel viewModel)
         {
             var frequencia = _frequenciaExecucaoRepository.ObterPorId(Guid.Parse(viewModel.FrequenciaExecucaoId.ToString())).Result;
@@ -137,9 +148,11 @@ namespace FileManager.App.WebApp.Controllers
         }
 
         // GET: ArquivosController/Edit/5
-        public async Task<ActionResult> EditAsync(string id)
+        public async Task<ActionResult> EditAsync(Guid id)
         {
-            var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == Guid.Parse(id)).Result.ToList().FirstOrDefault());
+            var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault());
+
+            viewModel.Campos = _mapper.Map<IEnumerable<CampoViewModel>>(_camposRepository.Buscar(x => x.Arquivo.Id == id).Result).ToList();
 
             await PopularFrequenciasExecucao(viewModel);
             await PopularPrefixos(viewModel);

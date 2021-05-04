@@ -31,3 +31,16 @@ function EsconderTodasFrequencias() {
     $("#divDia2")[0].style.display = 'none';
     $("#divHorario")[0].style.display = 'none';
 }
+
+$("#btnAdd").on('click', function () {
+    $.ajax({
+        async: true,
+        data: $('#form').serialize(),
+        type: "POST",
+        url: '/Arquivos/AddCampo',
+        success: function (partialView) {
+            console.log("partialView: " + partialView);
+            $('#camposContainer').html(partialView);
+        }
+    });
+});

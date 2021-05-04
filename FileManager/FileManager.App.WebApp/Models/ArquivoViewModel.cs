@@ -28,7 +28,7 @@ namespace FileManager.App.WebApp.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string Esquema { get; set; }      
 
-        public IEnumerable<CampoViewModel> Campos { get; set; }
+        public List<CampoViewModel> Campos { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public bool Posicional { get; set; }
@@ -54,5 +54,10 @@ namespace FileManager.App.WebApp.Models
 
         //public DetalheArquivoFrequenciaViewModel DetalheArquivoFrequencia { get; set; }
         public IEnumerable<PrefixoViewModel> Prefixos { get; set; }
+
+        public ArquivoViewModel()
+        {
+            Campos = new List<CampoViewModel>();
+        }
     }
 }
