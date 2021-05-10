@@ -40,6 +40,8 @@ namespace FileManager.App.WebApp
             services.AddScoped<ICamposRepository, CamposRepository>();
             services.AddScoped<ISendMessagePort, ServiceBus>();
 
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             services.AddControllersWithViews(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

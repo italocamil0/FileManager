@@ -17,11 +17,12 @@ namespace FileManager.Infra.Persistence
 
         public async Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos()
         {
-            return await Db.Arquivos.AsNoTracking().Include(p => p.Prefixo).Include(d => d.FrequenciaExecucao)
+            return await Db.Arquivos.AsNoTracking().Include(p => p.Prefixo).Include(d => d.FrequenciaExecucao).Include(c=>c.Campos)
                 .OrderBy(p => p.Tabela).ToListAsync();
         }
 
 
+       
         //public async Task<DetalheArquivoFrequencia> ObterDetalheArquivoFrequencia(Guid idArquivo)
         //{
         //    return await Db.DetalheArquivoFrequencia.FirstOrDefaultAsync(x => x.ArquivoId == idArquivo);

@@ -43,8 +43,8 @@ namespace FileManager.Infra.Persistence
         }
 
         public virtual async Task Atualizar(TEntity entity)
-        {
-            DbSet.Update(entity);
+        {            
+            DbSet.Update(entity);              
             await SaveChanges();
         }
 

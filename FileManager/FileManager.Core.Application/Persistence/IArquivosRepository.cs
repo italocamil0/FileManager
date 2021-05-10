@@ -8,6 +8,6 @@ namespace FileManager.Core.Application.Persistence
 {
     public interface IArquivosRepository : IRepository<Arquivo>
     {
-        Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos();
+        Task<IEnumerable<Arquivo>> ObterArquivosFrequenciasPrefixos();       
     }
 }

@@ -108,7 +108,7 @@ namespace FileManager.App.WebApp.Controllers
         [HttpPost]
        // [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddCampo(ArquivoViewModel arquivo)
-        {
+        {            
             arquivo.Campos.Add(new CampoViewModel());
             return PartialView("_CamposArquivo", arquivo);
         }
@@ -151,12 +151,16 @@ namespace FileManager.App.WebApp.Controllers
         public async Task<ActionResult> EditAsync(Guid id)
         {
             var viewModel = _mapper.Map<ArquivoViewModel>(_arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault());
-
-            viewModel.Campos = _mapper.Map<IEnumerable<CampoViewModel>>(_camposRepository.Buscar(x => x.Arquivo.Id == id).Result).ToList();
+           
 
             await PopularFrequenciasExecucao(viewModel);
             await PopularPrefixos(viewModel);
 
+
+
+            viewModel.Campos = _mapper.Map<List<CampoViewModel>>(_camposRepository.Buscar(x => x.Arquivo.Id == id).Result);
+
+            viewModel.Campos.OrderBy(x => x.DataRegistro);
             //var teste = await _arquivosRepository.ObterDetalheArquivoFrequencia(viewModel.Id);
 
             //viewModel.DetalheArquivoFrequencia =  _mapper.Map<DetalheArquivoFrequenciaViewModel>(teste);
@@ -176,8 +180,11 @@ namespace FileManager.App.WebApp.Controllers
                 if (ModelState.IsValid)
                 {
                     LimparFrequencia(viewModel);
-                    var arquivoBase = _mapper.Map<Arquivo>(viewModel);
-                    await _arquivosRepository.Atualizar(_mapper.Map<Arquivo>(viewModel));
+                    
+                    await PopularFrequenciasExecucao(viewModel);
+                    await PopularPrefixos(viewModel);
+                    var arquivoBase = _mapper.Map<Arquivo>(viewModel);                    
+                    await _arquivosRepository.Atualizar(arquivoBase);
                 }
                 else
                 {
@@ -190,7 +197,7 @@ namespace FileManager.App.WebApp.Controllers
             {
                 return View(viewModel);
             }
-        }
+        }        
 
         // GET: ArquivosController/Delete/5
         public ActionResult Delete(Guid id)
@@ -205,6 +212,13 @@ namespace FileManager.App.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(ArquivoViewModel viewModel)
         {
+            var campos = _camposRepository.Buscar(x => x.Arquivo.Id == viewModel.Id).Result.ToList();
+
+            foreach (var campo in campos)
+            {
+                await _camposRepository.Remover(campo.Id);
+            }
+
             await _arquivosRepository.Remover(viewModel.Id);
             return RedirectToAction(nameof(Index));
         }

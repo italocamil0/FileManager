@@ -17,6 +17,8 @@ namespace FileManager.Infra.Persistence.Context
 
         public DbSet<Prefixo> Prefixos { get; set; }
 
+        public DbSet<Campo> Campo { get; set; }
+
         //public DbSet<DetalheArquivoFrequencia> DetalheArquivoFrequencia { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +38,10 @@ namespace FileManager.Infra.Persistence.Context
                 .HasOne(po => po.User)
                 .WithMany(a => a.Arquivos)
                 .HasForeignKey(po => po.UserId);
+
+            modelBuilder.Entity<Campo>()
+                .Property(c => c.DataRegistro)
+                .HasDefaultValueSql("getdate()");
 
             //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.ArquivoId).IsUnique(true);
             //modelBuilder.Entity<DetalheArquivoFrequencia>().HasIndex(s => s.FrequenciaExecucaoId).IsUnique(true);

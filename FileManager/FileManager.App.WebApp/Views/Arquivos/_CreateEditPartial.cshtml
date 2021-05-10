@@ -8,7 +8,7 @@
             <label asp-for="Tabela" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                    
                     <input asp-for="Tabela" class="form-control" placeholder="Nome" />
                 </div>
                 <span asp-validation-for="Tabela" class="text-danger"></span>
@@ -18,7 +18,7 @@
             <label asp-for="Esquema" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <input asp-for="Esquema" class="form-control" placeholder="Esquema" />
                 </div>
                 <span asp-validation-for="Esquema" class="text-danger"></span>
@@ -28,7 +28,7 @@
             <label asp-for="Posicional" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <input class="form-check-input" asp-for="Posicional" /> @Html.DisplayNameFor(model => model.Posicional)
                 </div>
                 <span asp-validation-for="Posicional" class="text-danger"></span>
@@ -38,7 +38,7 @@
             <label asp-for="Divisor" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <input asp-for="Divisor" class="form-control" placeholder="Divisor" />
                 </div>
                 <span asp-validation-for="Divisor" class="text-danger"></span>
@@ -50,7 +50,7 @@
             <label asp-for="Prefixo" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <select asp-for="PrefixoId" class="form-control" asp-items="@(new SelectList(Model.Prefixos, "Id", "Descricao"))">
                         <option></option>
                     </select>
@@ -63,7 +63,7 @@
             <label asp-for="FrequenciaExecucao" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <select asp-for="FrequenciaExecucaoId" class="form-control" asp-items="@(new SelectList(Model.FrequenciasExecucao, "Id", "Frequencia"))">
                         <option></option>
                     </select>
@@ -76,7 +76,7 @@
             <label asp-for="DiaDaSemana" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <select asp-for="DiaDaSemana" class="form-control">
                         <option selected>Domingo</option>
                         <option>Segunda</option>
@@ -94,8 +94,7 @@
         <div id="divDia1" class="form-group" style="display:none">
             <label asp-for="Dia1" class="control-label col-md-1"></label>
             <div class="col-md-11">
-                <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                <div class="input-group m-b">                    
                     <input asp-for="Dia1" class="form-control"  placeholder="Dia 1" />
                 </div>
                 <span asp-validation-for="Dia1" class="text-danger"></span>
@@ -106,7 +105,7 @@
             <label asp-for="Dia2" class="control-label col-md-1"></label>
             <div class="col-md-11">
                 <div class="input-group m-b">
-                    <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                    
                     <input asp-for="Dia2" class="form-control" placeholder="Dia 2" />
                 </div>
                 <span asp-validation-for="Dia2" class="text-danger"></span>
@@ -115,7 +114,7 @@
 
         <div id="divHorario" class="form-group" style="display:none">
             <label asp-for="Horario" class="control-label col-md-1"></label>
-            <div class="col-md-11">
+            <div class="col-md-2">
                 <div class="input-group clockpicker" data-autoclose="true">
                     <input asp-for="Horario" autocomplete="off" type="text" class="form-control">
                     <span class="input-group-addon">
