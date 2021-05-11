@@ -58,6 +58,9 @@ namespace FileManager.App.WebApp.Controllers
         {
             var arquivo = _arquivosRepository.Buscar(x => x.Id == id).Result.ToList().FirstOrDefault();
 
+            arquivo.Campos = _camposRepository.Buscar(x => x.Arquivo.Id == id).Result;
+            arquivo.Campos.OrderBy(x => x.DataRegistro);
+
             _sendMessagePort.SendMessageAsync(arquivo);
 
             return RedirectToAction(nameof(Index));
