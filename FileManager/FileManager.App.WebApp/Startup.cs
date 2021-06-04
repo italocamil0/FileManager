@@ -1,6 +1,7 @@
 using FileManager.Core.Adapters.ServiceBus;
 using FileManager.Core.Application.Persistence;
 using FileManager.Core.Application.Port;
+using FileManager.Core.Application.Service;
 using FileManager.Infra.Persistence;
 using FileManager.Infra.Persistence.Context;
 using FileManager.Infra.Security.IoC;
@@ -34,11 +35,17 @@ namespace FileManager.App.WebApp
 
             services.AddAutoMapper(typeof(Startup));
 
+
+            
             services.AddScoped<IArquivosRepository, ArquivosRepository>();
             services.AddScoped<IFrequenciaExecucaoRepository, FrequenciaExecucaoRepository>();
             services.AddScoped<IPrefixoRepository, PrefixoRepository>();
             services.AddScoped<ICamposRepository, CamposRepository>();
             services.AddScoped<ISendMessagePort, ServiceBus>();
+            services.AddScoped<IArquivosPort, ArquivosService>();
+            services.AddScoped<IFrequenciaExecucaoPort, FrequenciaExecucaoService>();
+            services.AddScoped<IPrefixoPort, PrefixoService>();
+            services.AddScoped<ICamposPort, CamposService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
